@@ -1,12 +1,17 @@
 const express = require('express')
+const startupDebugger = require('debug')('app:startup')
+const dbDebugger = require('debug')('app:db')
+const config = require('config')
 const app = express()
 const morgan = require('morgan')
 app.use(express.json())
 app.use(morgan('tiny'))
 
+startupDebugger('Startup debugger')
+dbDebugger("deb DEbugger")
 
-
-
+console.log(config.get('name'))
+console.log(config.get('password'))
 const genres =[{
     "id": 1,
     "genre": "genre1"
@@ -24,7 +29,7 @@ const genres =[{
 
 
 app.get('/api/genres',(req,res)=>{
-res.send(req.body)
+res.send(genres)
 })
 
 app.get('/api/genres/:id',(req,res)=>{
