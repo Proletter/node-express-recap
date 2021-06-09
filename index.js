@@ -1,6 +1,11 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 app.use(express.json())
+app.use(morgan('tiny'))
+
+
+
 
 const genres =[{
     "id": 1,
@@ -19,7 +24,7 @@ const genres =[{
 
 
 app.get('/api/genres',(req,res)=>{
-res.send(genres)
+res.send(req.body)
 })
 
 app.get('/api/genres/:id',(req,res)=>{
@@ -57,6 +62,8 @@ app.delete('/api/genres/:id',(req,res)=>{
      genres.splice(index,1)
     res.send(genres)
 })
+
+console.log(app.get("env"))
 
 
 const port = process.env.PORT || 1337
