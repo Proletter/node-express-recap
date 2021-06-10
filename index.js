@@ -5,9 +5,11 @@ const config = require('config')
 const app = express()
 const morgan = require('morgan')
 const genreRoute = require('./routes/genres')
+const homeRouter = require('./routes/home')
 app.use(express.json())
 app.use(morgan('tiny'))
 app.use('/api/genres', genreRoute)
+app.use('/',homeRouter)
 
 
 app.set('view engine', 'pug')
@@ -18,11 +20,7 @@ console.log(config.get('name'))
 console.log(config.get('password'))
 
 
-app.get('/',(req,res)=>{
-    res.render('index',{
-        message: "hello world"
-    })
-    })
+
 
 
 console.log(app.get("env"))
